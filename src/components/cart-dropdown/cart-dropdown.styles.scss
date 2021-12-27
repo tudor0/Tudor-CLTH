@@ -19,6 +19,13 @@
     overflow-x: hidden;
   }
 
+  .empty-text {
+    display: flex;
+    justify-content: center;
+    height: 45vh;
+    align-items: center;
+  }
+
   button {
     margin-top: auto;
   }
