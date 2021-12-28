@@ -8,12 +8,14 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { createStructuredSelector } from "reselect";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import logo from "../../assets/logo.png";
 import "./header.styles.scss";
 
 const Header = ({ currentUser, hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
-      <Logo className="logo" />
+      {/* <Logo className="logo" /> */}
+      <img src={logo} className="logo" />
     </Link>
     <div className="options">
       <Link className="option" to="/">
