@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const HeaderContainer = styled.div`
   height: 70px;
@@ -12,16 +12,7 @@ export const HeaderContainer = styled.div`
 export const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;
-  padding-left: 0.4vw;
-  .logo {
-    width: 70px;
-    height: 70px;
-  }
-`;
-
-export const Logo = styled.img`
-  width: 70px;
-  height: 70px;
+  padding: 25px;
 `;
 
 export const OptionsContainer = styled.div`

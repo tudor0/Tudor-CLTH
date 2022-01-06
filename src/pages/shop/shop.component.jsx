@@ -1,18 +1,16 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
-import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
-import CollectionPageContainer from "../collection/collection.container";
-import { createStructuredSelector } from "reselect";
-import {
-  selectIsCollectionFetching,
-  selectIsCollectionsLoaded,
-} from "../../redux/shop/shop.selectors";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
+
+import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
+import CollectionPageContainer from '../collection/collection.container';
 
 class ShopPage extends React.Component {
   componentDidMount() {
     const { fetchCollectionsStart } = this.props;
+
     fetchCollectionsStart();
   }
 
@@ -20,7 +18,7 @@ class ShopPage extends React.Component {
     const { match } = this.props;
 
     return (
-      <div className="shop-page">
+      <div className='shop-page'>
         <Route
           exact
           path={`${match.path}`}
@@ -35,13 +33,11 @@ class ShopPage extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  isCollectionFetching: selectIsCollectionFetching,
-  isCollectionsLoaded: selectIsCollectionsLoaded,
+const mapDispatchToProps = dispatch => ({
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
+export default connect(
+  null,
+  mapDispatchToProps
+)(ShopPage);

@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-const firebaseConfig = {
+const config = {
   apiKey: "AIzaSyCMaEWysjkXfvPyqnJn5kZPwsE3k-hAUD0",
   authDomain: "crown-clothing-a66e3.firebaseapp.com",
   projectId: "crown-clothing-a66e3",
@@ -12,7 +12,7 @@ const firebaseConfig = {
   measurementId: "G-M198BJG4VD",
 };
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(config);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -44,11 +44,13 @@ export const addCollectionAndDocuments = async (
   objectsToAdd
 ) => {
   const collectionRef = firestore.collection(collectionKey);
+
   const batch = firestore.batch();
   objectsToAdd.forEach((obj) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
+
   return await batch.commit();
 };
 
@@ -68,6 +70,15 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {});
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 };
 
 export const auth = firebase.auth();
